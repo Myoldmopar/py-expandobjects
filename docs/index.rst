@@ -10,7 +10,7 @@ Welcome to ExpandObjects's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-
+   model_documentation/base
 
 Indices and tables
 ==================
