@@ -1,0 +1,8 @@
+[run]
+source =
+        expandobjects/
+        tests/
+omit =
+        /usr/*
+        .tox/*
+        */.pyenv/*
