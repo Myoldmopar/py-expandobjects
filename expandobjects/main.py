@@ -83,7 +83,7 @@ def sub_worker(these_argv, raise_exceptions=False, print_error_messages=True):
 def main():  # pragma no cover
     """This is the main command line entry point to this library.
     After a pip install, a binary will be available on the Python bin path called \"expand_objects\", which provides
-    an entry point into this function.  
+    an entry point into this function.
 
     Currently this function accepts two positional arguments:
     1. The name of the file to be expanded
