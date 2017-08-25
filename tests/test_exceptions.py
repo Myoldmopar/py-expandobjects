@@ -1,5 +1,6 @@
 import unittest
-from expandobjects.exceptions import BasePyExpandObjectsException, VirtualMethodUse
+
+from expandobjects.exceptions import BasePyExpandObjectsException, VirtualMethodUse, InvalidCommandLineArguments
 
 
 class TestBasePyExpandObjectsException(unittest.TestCase):
@@ -16,3 +17,9 @@ class TestVirtualMethodUse(unittest.TestCase):
     def test_string_repr(self):
         e = VirtualMethodUse("a", "b")
         self.assertEqual("Virtual Method Called: Class \"a\"; Method: \"b\"", str(e))
+
+
+class TestInvalidCommandLineArguments(unittest.TestCase):
+    def test_raises(self):
+        with self.assertRaises(InvalidCommandLineArguments):
+            raise InvalidCommandLineArguments()
