@@ -6,6 +6,7 @@ from expandobjects.expander import ExpansionManager
 
 
 def usage(binary_name):
+    """Provides a usage string that can be printed to terminal or otherwise"""
     return """ \
 Expand template objects in EnergyPlus.  Usage:
 $ %s "/path/to/my.idf" ["/path/to/expanded_file_name.idf"]
@@ -13,6 +14,7 @@ $ %s "/path/to/my.idf" ["/path/to/expanded_file_name.idf"]
 
 
 def sub_worker(these_argv, raise_exceptions=False, print_error_messages=True):
+    """This does the heavy lifting of processing command line args and preparing for an actual expansion"""
 
     # there should always be one command line argument, the binary name
     # if there's not, then in that weird situation I'm OK having an unhandled exception

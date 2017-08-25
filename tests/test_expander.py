@@ -4,7 +4,6 @@ from expandobjects.expander import ExpansionManager
 
 
 class TestExpander(unittest.TestCase):
-
     def test_simple_expansion(self):
         input_object = 'World'
         em = ExpansionManager()

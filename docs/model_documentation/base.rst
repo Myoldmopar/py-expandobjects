@@ -5,6 +5,7 @@ Model Documentation
    :maxdepth: 2
    :caption: Contents:
 
+   main
    exceptions
    expansions
    io
