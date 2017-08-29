@@ -180,7 +180,9 @@ class IDFStructure(object):
         """
         s = ""
         for idf_obj in self.objects:
-            idd_obj = idd_structure.get_object_by_type(idf_obj.object_name)
+            idd_obj = None
+            if idd_structure:
+                idd_obj = idd_structure.get_object_by_type(idf_obj.object_name)
             s += idf_obj.object_string(idd_obj) + "\n"
         return s
 
