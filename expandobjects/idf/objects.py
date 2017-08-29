@@ -90,42 +90,19 @@ class IDFObject(object):
             for comment_line in self.fields:
                 s += comment_line + "\n"
             return s
-        if not idd_object:
-            if len(self.fields) == 0:
-                s = self.object_name + ";\n"
-            else:
-                s = self.object_name + ",\n"
-                padding_size = 25
-                for index, idf_field in enumerate(self.fields):
-                    if index == len(self.fields) - 1:
-                        terminator = ";"
-                    else:
-                        terminator = ","
-                    s += "  " + (idf_field + terminator).ljust(
-                        padding_size) + "!- \n"
-            return s
+        if len(self.fields) == 0:
+            s = self.object_name + ";\n"
         else:
-            if len(self.fields) == 0:
-                s = self.object_name + ";\n"
-            else:
-                idd_fields = idd_object.fields
-                s = self.object_name + ",\n"
-                padding_size = 25
-                for index, idf_idd_fields in enumerate(zip(self.fields, idd_fields)):
-                    idf_field, idd_field = idf_idd_fields
-                    if index == len(self.fields) - 1:
-                        terminator = ";"
-                    else:
-                        terminator = ","
-                    if "\\units" in idd_field.meta_data:
-                        units_string = " {" + idd_field.meta_data["\\units"][0] + "}"
-                    else:
-                        units_string = ""
-                    if idd_field.field_name is None:  # pragma no cover  - our files don't have an object like this yet
-                        idd_field.field_name = ""
-                    s += "  " + (str(idf_field) + terminator).ljust(
-                        padding_size) + "!- " + idd_field.field_name + units_string + "\n"
-            return s
+            s = self.object_name + ",\n"
+            padding_size = 25
+            for index, idf_field in enumerate(self.fields):
+                if index == len(self.fields) - 1:
+                    terminator = ";"
+                else:
+                    terminator = ","
+                s += "  " + (idf_field + terminator).ljust(
+                    padding_size) + "!- \n"
+        return s
 
     def write_object(self, file_object):
         """
@@ -181,8 +158,6 @@ class IDFStructure(object):
         s = ""
         for idf_obj in self.objects:
             idd_obj = None
-            if idd_structure:
-                idd_obj = idd_structure.get_object_by_type(idf_obj.object_name)
             s += idf_obj.object_string(idd_obj) + "\n"
         return s
 
@@ -198,15 +173,3 @@ class IDFStructure(object):
         with open(idf_path, "w") as f:
             f.write(self.whole_idf_string(idd_structure))
         return None
-
-    def global_swap(self, dict_of_swaps):
-        upper_case_swaps = {}
-        for k, v in dict_of_swaps.iteritems():
-            upper_case_swaps[k.upper()] = v
-        for idf_object in self.objects:
-            if idf_object.comment:
-                continue
-            else:
-                for i, idf_field in enumerate(idf_object.fields):
-                    if idf_field.upper() in upper_case_swaps:
-                        idf_object.fields[i] = upper_case_swaps[idf_field.upper()]
