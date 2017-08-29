@@ -138,3 +138,10 @@ class TestIDFProcessingViaFile(unittest.TestCase):
         idf_structure = processor.process_file_given_file_path(idf_path)
         self.assertEquals(1, len(idf_structure.objects))
         self.assertAlmostEqual(idf_structure.version_float, 1.1, 1)
+
+    def test_missing_version_idf(self):
+        cur_dir = os.path.dirname(os.path.realpath(__file__))
+        idf_path = os.path.join(cur_dir, "1ZoneEvapCooler_NoVersion.idf")
+        processor = IDFProcessor()
+        with self.assertRaises(ProcessingException):  # should fail because final version processing fails
+            processor.process_file_given_file_path(idf_path)
