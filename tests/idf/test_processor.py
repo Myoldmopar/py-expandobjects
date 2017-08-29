@@ -102,6 +102,19 @@ something without a semicolon !- with a comment
             processor.process_file_via_stream(StringIO.StringIO(idf_object))
 
 
+class TestIDFProcessingExtras(unittest.TestCase):
+
+    def test_whole_idf_valid_with_comments(self):
+        idf_string = """
+        Version,12.9;
+        MyObject,1,1,1;
+        ! ME COMMENT
+        MyObject,1,1,1;"""
+        idf_structure = IDFProcessor().process_file_via_string(idf_string)
+        s_idf = idf_structure.whole_idf_string(None)
+        self.assertTrue('ME COMMENT' in s_idf)
+
+
 class TestIDFProcessingViaFile(unittest.TestCase):
     def test_valid_idf_file_simple(self):
         cur_dir = os.path.dirname(os.path.realpath(__file__))
