@@ -1,5 +1,4 @@
-from expandobjects.idf.processor import IDFProcessor
-from expandobjects.idf.objects import IDFStructure, IDFObject
+from pyiddidf.idf.objects import IDFStructure, IDFObject
 
 
 class ExpansionManager(object):
@@ -10,16 +9,14 @@ class ExpansionManager(object):
     def __init__(self):
         pass
 
-    def expand(self, input_file_text):
-        processor = IDFProcessor()
-        idf_structure = processor.process_file_via_string(input_file_text)
+    def expand(self, idf_structure, idd_structure):
         new_idf_structure = IDFStructure("")
         new_idf_structure.objects = []
         for object in idf_structure.objects:
             if object.object_name == 'HVACTemplate:Something':
-                new_idf_object = IDFObject(['Something,NewField1'])
+                new_idf_object = IDFObject(['Something', 'NewField1'])
                 new_idf_structure.objects.append(new_idf_object)
             else:
                 new_idf_structure.objects.append(object)
-        p = new_idf_structure.whole_idf_string()
+        p = new_idf_structure.whole_idf_string(idd_structure)
         return p
