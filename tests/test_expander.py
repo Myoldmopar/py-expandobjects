@@ -34,5 +34,5 @@ class TestExpander(unittest.TestCase):
             "  NewField1;               !- ",
             "",
             ""])
-        output_text = em.expand(idf_structure, idd_structure)
+        output_text = em.expand(idd_structure, idf_structure)
         self.assertEqual(expected_text, output_text)

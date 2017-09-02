@@ -9,7 +9,7 @@ class ExpansionManager(object):
     def __init__(self):
         pass
 
-    def expand(self, idf_structure, idd_structure):
+    def expand(self, idd_structure, idf_structure):
         new_idf_structure = IDFStructure("")
         new_idf_structure.objects = []
         for object in idf_structure.objects:
