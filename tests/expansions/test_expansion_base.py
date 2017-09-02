@@ -1,6 +1,7 @@
 import unittest
-from expandobjects.expansions.expansion_base import BaseExpansion
+
 from expandobjects.exceptions import VirtualMethodUse
+from expandobjects.expansions.expansion_base import BaseExpansion
 
 
 class TestExpansionBase(unittest.TestCase):
