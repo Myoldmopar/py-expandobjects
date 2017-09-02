@@ -11,14 +11,14 @@ class TestExpander(unittest.TestCase):
         !IDD_Version 34.7.0
         !IDD_BUILD asdfadasd
         \\group Simulation Parameters
-        
+
         Version,
           A1; \\field Version Identifier
-        
+
         HVACTemplate:Something,
           A1, \\field Field 1
           A2; \\field Field 2
-        
+
         Something,
           A1; \\field Field 1 Again
         """
