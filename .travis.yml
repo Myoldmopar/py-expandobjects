@@ -1,21 +1,29 @@
 language: python
-
 python:
-  - "2.7"
-
+- '2.7'
 cache: pip
-
 env:
   matrix:
-    - TOX_ENV=python
-    - TOX_ENV=flake8
-
+  - TOX_ENV=python
+  - TOX_ENV=flake8
+  - TOX_ENV=spelling
+  - TOX_ENV=package
 install:
-  - pip install --upgrade pip
-  - pip install tox
-  - pip install tox coveralls
-
+- pip install --upgrade pip
+- pip install tox
+- pip install tox coveralls
 script:
-  - tox -e $TOX_ENV
-
+- tox -e $TOX_ENV
 after_success: test $TOX_ENV = "python" && coveralls
+deploy:
+- provider: pypi
+  user: Myoldmopar
+  skip_cleanup: true
+  skip_upload_docs: true
+  password:
+    secure: u0v1UIW4GvpgNtuCuTqTFDPlgU5y2Y2a0pU49aY+wCdXcub0zqXsRjj1oSme6dKgAOynuzhwxuFtqhelPilhsJvEFtGAndhFspXjFwc/F5hC2gSLcoirCRS8nYExZHppgsfXpOekrItoMHSRZrx/K7nxuEnX1BPyuPkXwUElZi5pxgIFiPmmPhRPRu9DK42tZKkDwjlXk6xYJ3KnByNzKaakNrBGBfYzMMhzC9TJbb1RkWX2Mnk3aYDH2iesOTif+jAIBZgFLMyx5nS9mU1KZfnomznBITVRU+LUjZNsyFUCBv2ZVlv7dLC4ONuDPpmpWJJHI+aRvYaQ3cZMyrsXahJf/fiBsQSBVwzUvD7q1tZo5L3j1ZiKyICbB/PeDKfLEzzqCTt2g7IIBwEQ2HBJpwtLfHM8dJkAxKYsJ/CXlz5xbXeQs9to+jhay/lYCUt4mirHuR5vQjma72hSNKTFA799qx3X73akcXa+m5AwcrhAMYy+5Abyq3+ncg01vGCGYFc4H87M6vykNi3ZEPmDeNr8VnwHAHRXEEZLwfk/CP9I51jbnoBLzO7TVE485CGWcUNcQdf3QmfpIt0ABjX+nuPt71KJhH7CSaqrejmdTMFEvlsCs0lbjYS/99tTuyYADo26x2NgVTHMHMZ876HiATBq/ksiGGd8IcTccVlbr+M=
+  on:
+    tags: true
+    distributions: sdist bdist_wheel
+    repo: Myoldmopar/py-expandobjects
+    condition: $TOX_ENV = package

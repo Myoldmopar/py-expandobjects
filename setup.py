@@ -3,7 +3,7 @@ import expandobjects
 
 
 setuptools.setup(
-    name='ExpandObjects',
+    name='pyexpandobjects',
     version=expandobjects.__version__,
     author="Edwin Lee",
     author_email="edwin.lee@nrel.gov",
