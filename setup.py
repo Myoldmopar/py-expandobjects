@@ -1,6 +1,6 @@
 import setuptools
-import expandobjects
 
+import expandobjects
 
 setuptools.setup(
     name='pyexpandobjects',
